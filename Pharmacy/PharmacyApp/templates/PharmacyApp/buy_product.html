@@ -1,0 +1,102 @@
+<!-- buy_product.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy - Buy Product</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #6a5acd; /* Purple */
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #4169e1; /* Light Blue */
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Pharmacy - Buy Product</h2>
+        <label for="id_user">User:</label>
+        {{ form.user }}
+
+        <label for="id_product">Product:</label>
+        {{ form.product }}
+
+        <label for="id_quantity_sold">Quantity Sold:</label>
+        {{ form.quantity_sold }}
+
+        <label for="id_total_price">Total Price:</label>
+        {{ form.total_price }}
+
+        <label for="id_transaction_date">Transaction Date:</label>
+        {{ form.transaction_date }}
+
+        <label for="id_payment_method">Payment Method:</label>
+        {{ form.payment_method }}
+
+        <label for="id_discount">Discount:</label>
+        {{ form.discount }}
+
+        <label for="id_total_amount_paid">Total Amount Paid:</label>
+        {{ form.total_amount_paid }}
+
+        <label for="id_prescription_id">Prescription ID:</label>
+        {{ form.prescription_id }}
+
+        <button type="submit">Buy Product</button>
+    </form>
+</body>
+
+</html>

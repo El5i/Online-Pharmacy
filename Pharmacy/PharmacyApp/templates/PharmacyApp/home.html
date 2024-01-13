@@ -1,0 +1,99 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Pharmacy</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Bootstrap default background color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #6a5acd; /* Purple */
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #4169e1 !important; /* Light Blue */
+        }
+
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">Online Pharmacy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'manager_page' %}">Manager Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'client_page' %}">Client Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'magazine' %}">Magazine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register_supplier' %}">Register Supplier</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register_product' %}">Register Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'product_list' %}">Product List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'supplier_list' %}">Supplier List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'buy_product' %}">Buy Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'transaction_history' %}">Transaction History</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container">
+        <h1>Welcome to our Online Pharmacy</h1>
+        <p>Your one-stop destination for all your pharmaceutical needs.</p>
+        <!-- Add more content as needed -->
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

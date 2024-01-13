@@ -1,0 +1,83 @@
+<!-- transaction_history.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy - Transaction History</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #6a5acd; /* Purple */
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Pharmacy - Transaction History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Product</th>
+                <th>Quantity Sold</th>
+                <th>Total Price</th>
+                <th>Transaction Date</th>
+                <th>Payment Method</th>
+                <th>Discount</th>
+                <th>Total Amount Paid</th>
+                <th>Prescription ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in user_transactions %}
+            <tr>
+                <td>{{ transaction.transaction_id }}</td>
+                <td>{{ transaction.product.product_name }}</td>
+                <td>{{ transaction.quantity_sold }}</td>
+                <td>{{ transaction.total_price }}</td>
+                <td>{{ transaction.transaction_date }}</td>
+                <td>{{ transaction.payment_method }}</td>
+                <td>{{ transaction.discount }}</td>
+                <td>{{ transaction.total_amount_paid }}</td>
+                <td>{{ transaction.prescription_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
