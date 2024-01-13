@@ -4,6 +4,7 @@ from django.utils import timezone
 # Create your models here.
 
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
         if not email:
@@ -15,6 +16,11 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def create_manager(self, username, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_manager', True)
+        extra_fields.setdefault('is_client', False)
+        return self.create_user(username, email, password, **extra_fields)
+
     def create_superuser(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
@@ -25,6 +31,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self.create_user(username, email, password, **extra_fields)
+
 
 
 class User(AbstractUser, PermissionsMixin):

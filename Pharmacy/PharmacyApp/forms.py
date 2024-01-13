@@ -21,23 +21,23 @@ class LoginForm(forms.Form):
 class RegistrationForm(UserCreationForm):
     full_name = forms.CharField(max_length=100, required=True)
     phone_number = forms.CharField(max_length=15, required=True)
-    address = forms.CharField(widget=forms.Textarea, required=True)
-    role = forms.CharField(max_length=20, required=True)
-    date_of_birth = forms.DateField(required=True)
+    #address = forms.CharField(widget=forms.Textarea, required=True)
+    #role = forms.CharField(max_length=20, required=True)
+    #date_of_birth = forms.DateField(required=True)
     gender = forms.CharField(max_length=10, required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'full_name',
-                  'phone_number', 'address', 'role', 'date_of_birth', 'gender')
+                  'phone_number', 'gender')
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.full_name = self.cleaned_data['full_name']
         user.phone_number = self.cleaned_data['phone_number']
-        user.address = self.cleaned_data['address']
-        user.role = self.cleaned_data['role']
-        user.date_of_birth = self.cleaned_data['date_of_birth']
+        #user.address = self.cleaned_data['address']
+        #user.role = self.cleaned_data['role']
+        #user.date_of_birth = self.cleaned_data['date_of_birth']
         user.gender = self.cleaned_data['gender']
 
         if commit:
@@ -73,3 +73,11 @@ class ProductForm(forms.ModelForm):
     help_texts = {
         'expiry_date': 'Enter the expiry date of the product.',
     }
+
+
+class ManagerRegistrationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'full_name', 'phone_number', 'address', 'date_of_birth', 'gender']

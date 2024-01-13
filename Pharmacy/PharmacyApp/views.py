@@ -6,6 +6,7 @@ from django.views import View
 from .forms import RegistrationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from .forms import *
 
 # Create your views here.
@@ -42,6 +43,8 @@ class RegistrationView(View):
         return render(request, self.template_name, {'form': form})
 
 
+
+
 def login_view(request):
     msg = None
     form = LoginForm(request.POST or None)
@@ -50,20 +53,24 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
             if user is not None:
+                print(f"User: {user.username}, is_client: {user.is_client}, is_manager: {user.is_manager}")
+
                 login(request, user)
 
                 if user.is_client:
+                    print("Redirecting to client_page")
                     return redirect('client_page')
                 elif user.is_manager:
+                    print("Redirecting to manager_page")
                     return redirect('manager_page')
                 else:
                     # Redirect to a generic page or display an error message
                     messages.error(request, "Invalid user type.")
-                    return redirect('home')  # Redirect to a generic page
-
+                    print("Redirecting to home")
+                    return redirect('home')
             else:
                 msg = "Invalid Login Credentials"
         else:
@@ -71,8 +78,6 @@ def login_view(request):
 
     return render(request, 'PharmacyApp/login_view.html', {'form': form, 'msg': msg})
 
-
-# views.py
 
 
 def magazine_view(request):
@@ -101,3 +106,26 @@ def register_product_view(request):
     else:
         product_form = ProductForm()
     return render(request, 'PharmacyApp/magazine.html', {'product_form': product_form})
+
+
+
+
+
+def manager_registration_view(request):
+    template_name = 'PharmacyApp/manager_registration.html'
+
+    if request.method == 'POST':
+        form = ManagerRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_manager = True
+            user.is_client = False
+            user.role = 'Manager'
+            user.save()
+
+            login(request, user)  # Log in the user after registration
+            return redirect('home')  # Redirect to the home page (customize as needed)
+    else:
+        form = ManagerRegistrationForm()
+
+    return render(request, template_name, {'form': form})
